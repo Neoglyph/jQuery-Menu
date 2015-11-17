@@ -13,6 +13,15 @@ Dual licensed under the MIT (filamentgroup.com/examples/mit-license.txt) and GPL
 
 var allUIMenus = [];
 
+var slug = function(str) {
+    var $slug = '';
+    var trimmed = $.trim(str);
+    $slug = trimmed.replace(/[^a-z0-9-]/gi, '-').
+    replace(/-+/g, '-').
+    replace(/^-|-$/g, '');
+    return $slug.toLowerCase();
+}
+
 $.fn.menu = function(options){
 	var caller = this;
 	var options = options;
@@ -245,7 +254,7 @@ function Menu(caller, options){
 		menu.kill();
 		// edit this for your own custom function/callback:
 		$('.menuSelection').text($(item).text());
-		$('.menuSelection').val($(item).text());
+		$('.menuSelection').val(slug($(item).text()));
 		location.href = $(item).attr('href');
 	};
 };
